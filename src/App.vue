@@ -2,6 +2,12 @@
 import {ref} from 'vue';
 import {countries} from './components/data.js';
 const search = ref('');
+
+function getfilterCountries(){
+ return countries.filter(country => 
+ country.name.toLowerCase().includes(search.value.toLowerCase())
+ );
+}
 </script>
 
 <template>
@@ -13,7 +19,7 @@ const search = ref('');
     </p>
     <p class="mt-10">
     <ul>
-      <li v-for="country in countries" :key="country.code">
+      <li v-for="country in getfilterCountries()" :key="country.code">
         {{country.name}}
         <!-- <span class='text-red-500'>{{ search }}</span>{{country.name.toLowerCase().replace(search,'')}} -->
       </li>
